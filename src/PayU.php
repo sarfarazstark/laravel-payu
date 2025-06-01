@@ -83,7 +83,8 @@ class PayU {
         //     return true;
         // }
         return $transaction;
-    }    public function showPaymentForm($params) {
+    }
+    public function showPaymentForm($params) {
         // Set default values from config if not provided
         $params['surl'] = $params['surl'] ?? config('payu.success_url');
         $params['furl'] = $params['furl'] ?? config('payu.failure_url');
@@ -92,7 +93,7 @@ class PayU {
         if (empty($params['surl'])) {
             throw new \InvalidArgumentException('Success URL (surl) is required. Please set PAYU_SUCCESS_URL in your .env file or pass surl parameter.');
         }
-        
+
         if (empty($params['furl'])) {
             throw new \InvalidArgumentException('Failure URL (furl) is required. Please set PAYU_FAILURE_URL in your .env file or pass furl parameter.');
         }
@@ -313,7 +314,7 @@ class PayU {
         if (empty($params['surl'])) {
             throw new \InvalidArgumentException('Success URL (surl) is required. Please set PAYU_SUCCESS_URL in your .env file or pass surl parameter.');
         }
-        
+
         if (empty($params['furl'])) {
             throw new \InvalidArgumentException('Failure URL (furl) is required. Please set PAYU_FAILURE_URL in your .env file or pass furl parameter.');
         }
@@ -335,7 +336,7 @@ class PayU {
         if (empty($params['surl'])) {
             throw new \InvalidArgumentException('Success URL (surl) is required. Please set PAYU_SUCCESS_URL in your .env file or pass surl parameter.');
         }
-        
+
         if (empty($params['furl'])) {
             throw new \InvalidArgumentException('Failure URL (furl) is required. Please set PAYU_FAILURE_URL in your .env file or pass furl parameter.');
         }
