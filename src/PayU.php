@@ -1,6 +1,6 @@
 <?php
 
-namespace PayU\LaravelPayU;
+namespace SarfarazStark\LaravelPayU;
 
 class PayU {
     public $params;

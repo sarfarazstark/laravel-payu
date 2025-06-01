@@ -29,21 +29,21 @@
   },
   "autoload": {
     "psr-4": {
-      "PayU\\LaravelPayU\\": "src/"
+      "SarfarazStark\\LaravelPayU\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PayU\\LaravelPayU\\Tests\\": "tests/"
+      "SarfarazStark\\LaravelPayU\\Tests\\": "tests/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "PayU\\LaravelPayU\\PayUServiceProvider"
+        "SarfarazStark\\LaravelPayU\\PayUServiceProvider"
       ],
       "aliases": {
-        "PayU": "PayU\\LaravelPayU\\Facades\\PayU"
+        "PayU": "SarfarazStark\\LaravelPayU\\Facades\\PayU"
       }
     }
   },

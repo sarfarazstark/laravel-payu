@@ -1,10 +1,10 @@
 <?php
 
-namespace PayU\LaravelPayU\Tests\Unit;
+namespace SarfarazStark\LaravelPayU\Tests\Unit;
 
-use PayU\LaravelPayU\PayU;
-use PayU\LaravelPayU\PayUServiceProvider;
-use PayU\LaravelPayU\Facades\PayU as PayUFacade;
+use SarfarazStark\LaravelPayU\PayU;
+use SarfarazStark\LaravelPayU\PayUServiceProvider;
+use SarfarazStark\LaravelPayU\Facades\PayU as PayUFacade;
 use Orchestra\Testbench\TestCase;
 
 class PayUTest extends TestCase {

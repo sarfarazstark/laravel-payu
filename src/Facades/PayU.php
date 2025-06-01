@@ -1,6 +1,6 @@
 <?php
 
-namespace PayU\LaravelPayU\Facades;
+namespace SarfarazStark\LaravelPayU\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

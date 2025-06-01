@@ -1,6 +1,6 @@
 # Laravel PayU Package
 
-A Laravel package for integrating PayU payment gateway.
+A Laravel package for integrating PayU payment gateway with database transaction tracking.
 
 ## Installation
 
@@ -16,7 +16,14 @@ composer require sarfarazstark/laravel-payu
 php artisan vendor:publish --tag=payu-config
 ```
 
-3. Add your PayU credentials to `.env`:
+3. Publish and run the migrations:
+
+```bash
+php artisan vendor:publish --tag=payu-migrations
+php artisan migrate
+```
+
+4. Add your PayU credentials to `.env`:
 
 ```env
 PAYU_KEY=your_payu_key
@@ -30,12 +37,20 @@ PAYU_FAILURE_URL=http://your-site.com/payu/failure
 
 You can customize the PayU configuration in `config/payu.php` after publishing. All values can be set via `.env` for security.
 
+## Database Tables
+
+The package creates three database tables for transaction tracking:
+
+- `payu_transactions` - Stores payment transaction details
+- `payu_refunds` - Stores refund information
+- `payu_webhooks` - Stores webhook data for payment notifications
+
 ## Usage
 
 ### Basic Payment Form
 
 ```php
-use PayU\LaravelPayU\Facades\PayU;
+use LaravelPayU\Facades\PayU;
 
 $params = [
     'txnid' => 'TXN' . time(),
@@ -91,6 +106,68 @@ $isValid = PayU::verifyHash($request->all());
 - Card/bin/netbanking: `PayU::getCardBin($params)`, `PayU::getBinDetails($params)`, `PayU::getNetbankingStatus($params)`, `PayU::getIssuingBankStatus($params)`
 
 See the `doc/` folder for detailed API documentation and parameter requirements for each method.
+
+### Working with Transaction Models
+
+```php
+use LaravelPayU\Models\PayUTransaction;
+use LaravelPayU\Models\PayURefund;
+use LaravelPayU\Models\PayUWebhook;
+
+// Create a new transaction record
+$transaction = PayUTransaction::create([
+    'txnid' => 'TXN' . time(),
+    'amount' => 100.00,
+    'productinfo' => 'Test Product',
+    'firstname' => 'John',
+    'email' => 'john@example.com',
+    'status' => 'pending',
+    'payment_initiated_at' => now(),
+]);
+
+// Find transaction by txnid
+$transaction = PayUTransaction::where('txnid', 'TXN123456')->first();
+
+// Check transaction status
+if ($transaction->isSuccessful()) {
+    // Handle successful payment
+}
+
+// Get all successful transactions
+$successfulTransactions = PayUTransaction::successful()->get();
+
+// Get transaction with refunds
+$transaction = PayUTransaction::with('refunds')->find(1);
+
+// Check if transaction can be refunded
+if ($transaction->canBeRefunded()) {
+    $remainingAmount = $transaction->getRemainingRefundableAmount();
+}
+
+// Create a refund record
+$refund = PayURefund::create([
+    'refund_id' => PayURefund::generateRefundId(),
+    'txnid' => $transaction->txnid,
+    'amount' => 50.00,
+    'status' => 'pending',
+    'type' => 'refund',
+    'reason' => 'Customer request',
+    'refund_requested_at' => now(),
+]);
+
+// Create webhook record
+$webhook = PayUWebhook::create([
+    'webhook_id' => PayUWebhook::generateWebhookId(),
+    'txnid' => $transaction->txnid,
+    'event_type' => 'payment_success',
+    'status' => 'received',
+    'payload' => $webhookData,
+    'received_at' => now(),
+]);
+
+// Mark webhook as processed
+$webhook->markAsProcessed();
+```
 
 ## Testing
 
