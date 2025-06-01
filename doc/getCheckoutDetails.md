@@ -1,6 +1,6 @@
 # getCheckoutDetails
 
-The **get\_checkout\_details** API is a generic API using which they can get information when you create the custom checkout-pages, that will contain the payment options, offers, recommendations, and downtime details. The API provides the following details: 
+The **get\_checkout\_details** API is a generic API using which they can get information when you create the custom checkout-pages, that will contain the payment options, offers, recommendations, and downtime details. The API provides the following details:
 
 * **Payment option details**: The extended details for each payment option available for the merchant.
 * **Additional charges**: The additional charges configured for all payment options.
@@ -9,13 +9,14 @@ The **get\_checkout\_details** API is a generic API using which they can get inf
 
 # API Command: get_checkout_details
 
-
 # PHP
 
+```php
     public function getCheckoutDetails($params) {
         $this->params['data'] = ['var1' => $params['data'], 'command' => self::GET_CHECKOUT_DETAILS_API];
         return $this->execute();
     }
+```
 
 ## Method Arguments
 
@@ -23,12 +24,11 @@ The **get\_checkout\_details** API is a generic API using which they can get inf
 | --- | --- | --- |
 | var1 | JSON | {"requestId":"1","transactionDetails":{"amount":"28900"},"customerDetails":{"mobile":"9999999999"},"filters":{"paymentOptions":{"emi":{"dc":"all"}}},"useCase":{"checkCustomerEligibility":true}} |
 
-
 ## Output
-
 
 **If successfully fetched**
 
+```json
 {
   "status": 1,
   "details": {
@@ -363,9 +363,13 @@ The **get\_checkout\_details** API is a generic API using which they can get inf
     }
   }
 }
+```
+
 Get Additional Charges
 Sample Request
 Curl
+
+```json
 {
     "requestId": "12345678",
     "transactionDetails": {
@@ -375,7 +379,11 @@ Curl
       "getAdditionalCharges": true
     }
   }
+  ```
+
 Sample Response
+
+```json
 {
   "status": 1,
   "details": {
@@ -463,9 +471,13 @@ Sample Response
     }
   }
 }
+```
+
 Get Tax Specification
 Sample Request
 Curl
+
+```json
 {
   // Mandatory field, random id for debugging purposes only
   "requestId": "12345678",
@@ -478,7 +490,11 @@ Curl
     "getTaxSpecification": true
   }
 }
+```
+
 Sample Response
+
+```json
 {
   "status": 1,
   "details": {
@@ -500,9 +516,13 @@ Sample Response
     }
   }
 }
+```
+
 Check Down Status
 Sample Request
 Curl
+
+```json
 {
   // Mandatory field, random id for debugging purposes only
   "requestId": "12345678",
@@ -515,7 +535,11 @@ Curl
     "checkDownStatus": true
   }
 }
+```
+
 Sample Response
+
+```json
 {
   "status": 1,
   "details": {
@@ -543,4 +567,4 @@ Sample Response
     }
   }
 }
-
+```

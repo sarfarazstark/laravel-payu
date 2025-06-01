@@ -6,6 +6,7 @@ The Verify Payment (verify_payment) API gives you the status of the transaction.
 
 # PHP
 
+```php
     public function verifyPayment($params) {
         if(!empty($params['txnid'])){
             $transaction = $this->getTransactionByTxnId($params['txnid']);
@@ -18,21 +19,19 @@ The Verify Payment (verify_payment) API gives you the status of the transaction.
         }
         return false;
     }
-
-    
+```
 
 ## Method Arguments
 
-
 Argument |  Description
 ------------ | --------------------------
-*txnid* | In this argument you can put all the transaction IDs, that is, txnid (your transaction ID/order ID) values separated by pipe. 
+*txnid* | In this argument you can put all the transaction IDs, that is, txnid (your transaction ID/order ID) values separated by pipe.
 
 ## Output
 
-
 **If successfully fetched**
 
+```json
 {
       "status": 1,
       "msg": "1 out of 1 Transactions Fetched Successfully",
@@ -75,10 +74,11 @@ Argument |  Description
             }
       }
  }
-
+```
 
  **If txnID not found**
 
+```json
  {
       "status": 0,
       "msg": "0 out of 1 Transactions Fetched Successfully",
@@ -89,3 +89,4 @@ Argument |  Description
             }
       }
 }
+```

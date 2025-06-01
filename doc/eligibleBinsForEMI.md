@@ -4,13 +4,14 @@ The Eligible Bin for EMI API (eligibleBinsForEMI) is used only when the merchant
 
 # API Command: eligibleBinsForEMI
 
-
 # PHP
 
+```php
     public function checkEligibleEMIBins($params) {
         $this->params['data'] = ['var1' => $params['bin'], 'var2' => $params['card_num'], 'var3' => $params['bank_name'], 'command' => self::CHECK_ELIGIBLE_BIN_FOR_EMI_API];
         return $this->execute();
     }
+```
 
 ## Method Arguments
 
@@ -28,12 +29,11 @@ If NET used in the var1 parameter, the entire network token must be passed.
 
 *bank_name* | This parameter must include the bank name.
 
-
 ## Output
-
 
 **If successfully fetched**
 
+```js
 Array
 (
     [status] => 1
@@ -50,3 +50,4 @@ Array
 Array (
 [status] => 0
 [msg] => Invalid Bin )
+```

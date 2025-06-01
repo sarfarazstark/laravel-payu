@@ -4,13 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePayuTransactionsTable extends Migration {
+return new class extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up() {
+    public function up(): void {
         Schema::create('payu_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('txnid')->unique()->index();
@@ -31,8 +29,8 @@ class CreatePayuTransactionsTable extends Migration {
             $table->string('udf3')->nullable();
             $table->string('udf4')->nullable();
             $table->string('udf5')->nullable();
-            $table->string('status')->default('pending')->index(); // pending, success, failure, cancelled
-            $table->string('payment_mode')->nullable();
+            $table->enum('status', ['pending', 'success', 'failure', 'cancelled', 'failed'])->default('pending')->index();
+            $table->enum('payment_mode', ['CC', 'DC', 'NB', 'UPI', 'EMI', 'WALLET', 'CASH'])->nullable();
             $table->string('bankcode')->nullable();
             $table->string('bank_ref_num')->nullable();
             $table->string('error')->nullable();
@@ -46,20 +44,20 @@ class CreatePayuTransactionsTable extends Migration {
             $table->string('hash')->nullable();
             $table->json('request_data')->nullable();
             $table->json('response_data')->nullable();
+            $table->timestamp('payment_initiated_at')->nullable();
             $table->timestamp('payment_date')->nullable();
             $table->timestamps();
 
             $table->index(['status', 'created_at']);
             $table->index(['email', 'created_at']);
+            $table->index(['payment_date']);
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down() {
+    public function down(): void {
         Schema::dropIfExists('payu_transactions');
     }
-}
+};

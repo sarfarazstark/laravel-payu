@@ -4,7 +4,6 @@ The Check Action Status API (check_action_status) is used to check the status of
 
 # API Command: check_action_status
 
-
 # PHP
 
     public function checkRefundStatus($params) {
@@ -27,9 +26,9 @@ OR
 
 ## Output
 
-
 **If successfully fetched**
 
+```json
 {
       "status": 1,
       "msg": "1 out of 1 Transactions Fetched Successfully",
@@ -214,3 +213,4 @@ OR
             }
       }
 }
+```

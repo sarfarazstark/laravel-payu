@@ -4,7 +4,6 @@ The Get EMI Amount According to Interest API (getEmiAmountAccordingToInterest) i
 
 # API Command: getEmiAmountAccordingToInterest
 
-
 # PHP
 
     public function getEmiAmount($params) {
@@ -14,17 +13,15 @@ The Get EMI Amount According to Interest API (getEmiAmountAccordingToInterest) i
 
 ## Method Arguments
 
-
 Argument |  Description
 ------------ | --------------------------
 *amount* | The amount that must be converted to EMI.
 
-
 ## Output
-
 
 **Merchant Hosted Checkout EMI Response**
 
+```json
 {
       "7": {
             "EMIA3": {
@@ -159,3 +156,4 @@ Argument |  Description
             }
       }
 }
+```

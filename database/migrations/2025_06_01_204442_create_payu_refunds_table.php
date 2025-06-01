@@ -4,21 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePayuRefundsTable extends Migration {
+return new class extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up() {
+    public function up(): void {
         Schema::create('payu_refunds', function (Blueprint $table) {
             $table->id();
             $table->string('refund_id')->unique();
             $table->string('txnid');
             $table->string('payuid')->nullable();
             $table->decimal('amount', 10, 2);
-            $table->string('status')->default('pending'); // pending, success, failed, cancelled
-            $table->string('type')->default('refund'); // refund, cancel
+            $table->enum('status', ['pending', 'success', 'failed', 'cancelled', 'processing'])->default('pending');
+            $table->enum('type', ['refund', 'cancel', 'chargeback'])->default('refund');
             $table->string('reason')->nullable();
             $table->string('gateway_refund_id')->nullable();
             $table->json('request_data')->nullable();
@@ -30,15 +28,17 @@ class CreatePayuRefundsTable extends Migration {
             $table->index(['txnid', 'status']);
             $table->index(['refund_id']);
             $table->index(['status']);
+            $table->index(['created_at']);
+
+            // Foreign key relationship
+            $table->foreign('txnid')->references('txnid')->on('payu_transactions')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down() {
+    public function down(): void {
         Schema::dropIfExists('payu_refunds');
     }
-}
+};

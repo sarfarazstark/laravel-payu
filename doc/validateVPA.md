@@ -8,14 +8,14 @@ After the customer enters VPA on the merchant page, you need to call this API to
 
 # PHP
 
+```php
     public function validateUpi($params) {
         $this->params['data'] = ['var1' => $params['vpa'], 'var2' => $params['auto_pay_vpa'], 'command' => self::VALIDATE_UPI_HANLE_API];
         return $this->execute();
     }
-
+```
 
 ## Method Arguments
-
 
 Argument |  Description
 ------------ | --------------------------
@@ -25,9 +25,9 @@ Argument |  Description
 
 ## Output
 
-
 **Success Scenarios- Valid VPA**
 
+```json
 {
    "status":"SUCCESS",
    "vpa":"9999999999@upi",
@@ -36,12 +36,23 @@ Argument |  Description
    "isAutoPayBankValid":"NA",
    "payerAccountName":"ABC"
 }
+```
 
  **Failure Scenarios- Invalid VPA:**
 
-{"status":"SUCCESS","vpa":""abc@upi","isVPAValid":0,"payerAccountName":"NA"}  
+```json
+{"status":"SUCCESS","vpa":"abc@upi","isVPAValid":0,"payerAccountName":"NA"}
+```
 
  **Invalid VPA but handle supporting SI (Autopay):**
 
-{"status":"SUCCESS","vpa":""abc@upi","isVPAValid":0,"isAutoPayVPAValid":1,"isAutoPayBa
-nkValid":NA,"payerAccountName":"NA"}
+```json
+{
+    "status":"SUCCESS",
+    "vpa":"abc@upi",
+    "isVPAValid":0,
+    "isAutoPayVPAValid":1,
+    "isAutoPayBankValid":"NA",
+    "payerAccountName":"NA"
+    }
+```

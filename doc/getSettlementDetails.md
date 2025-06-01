@@ -4,34 +4,34 @@ You can use this API to retrieve settlement details which the bank has to settle
 
 # API Command: get_settlement_details
 
-
 # PHP
 
+```php
        public function getSettlementDetails($params) {
         $this->params['data'] = ['var1' => $params['data'], 'command' => self::GET_SETTLEMENT_DETAILS_API];
         return $this->execute();
     }
+```
 
 ## Method Arguments
 
 Argument | Data Type |  Description
 ------------ | ------------- | -------------
-*date/UTR number* | ```String``` | This parameter must contain any of the following parameters: Date for the settlement: Date for the settlement is required is in YYYY-MM-DD format. UTR (Unique Transaction Reference number-alphanumeric) number: UTR of the transaction is required. 
-
+*date/UTR number* | ```String``` | This parameter must contain any of the following parameters: Date for the settlement: Date for the settlement is required is in YYYY-MM-DD format. UTR (Unique Transaction Reference number-alphanumeric) number: UTR of the transaction is required.
 
 ## Output
-
 
 **If successfully fetched**
 
 Successful Response for Version 1
 
+```js
 (
-	    [status] => 1
-	    [msg] => 1 transactions settled on 2021-08-11
-	    [Txn_details] => Array
+     [status] => 1
+     [msg] => 1 transactions settled on 2021-08-11
+     [Txn_details] => Array
         (
-			[1] => Array
+   [1] => Array
                 (
                     [payuid] => 13799177287
                     [txnid] => 13818
@@ -53,30 +53,35 @@ Successful Response for Version 1
                     [igst] => 43.13000
                     [sgst] => 0.00000
                     [PG_TYPE] => HDFC_Internal_Plus
-                    [Card Type] => 
-                    [token] => 
+                    [Card Type] =>
+                    [token] =>
                 )
 
         )
 
 )
+```
 
 **If invalid date or no date found for Version 1 or Version 2**
 
 Date format is incorrect
 
+```json
 {
       "status": 0,
       "msg": "Please check date format it should be YYYY-MM-DD"
 }
+```
 
 If no data found for the particular date
 
-Array 
+```js
+Array
 (
       [status] => 1
-      [msg] => 0 transactions settled on 2015-05-01 
+      [msg] => 0 transactions settled on 2015-05-01
       [Txn_details] => Array
                 (
-                 ) 
+                 )
 )
+```

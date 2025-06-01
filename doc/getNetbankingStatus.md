@@ -4,16 +4,16 @@ The Get Net Banking Status API (getNetbankingStatus) is used to help you in hand
 
 # API Command: getNetbankingStatus
 
-
 # PHP
 
+```php
     public function getTransaction($params) {
         $this->params['data'] = ['var1' => $params['netbanking_code'], 'command' => self::GET_NETBANKING_STATUS_API];
         return $this->execute();
     }
+```
 
 ## Method Arguments
-
 
 Argument |  Description
 ------------ | --------------------------
@@ -21,18 +21,20 @@ Argument |  Description
 
 ## Output
 
-
 **If successfully fetched**
 
+```json
 {
       "ibibo_code": "AXIB",
       "title": "AXIS Bank NetBanking",
       "up_status": 0,
       "mode": "NB"
 }
-
+```
 
 **To get the status of all Net Banking options pass (value “default” is passed in input)**
+
+```json
 {
       "AXIB": {
             "ibibo_code": "AXIB",
@@ -65,3 +67,4 @@ Argument |  Description
             "mode": "CASH"
       }
 }
+```

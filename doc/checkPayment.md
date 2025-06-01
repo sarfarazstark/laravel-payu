@@ -6,6 +6,7 @@ This API gives you the status of the transaction, similar to verify_payment API.
 
 # PHP
 
+```php
     public function verifyPayment($params) {
         if(!empty($params['txnid'])){
             $transaction = $this->getTransactionByTxnId($params['txnid']);
@@ -18,21 +19,19 @@ This API gives you the status of the transaction, similar to verify_payment API.
         }
         return false;
     }
-
-    
+```
 
 ## Method Arguments
 
-
 Argument |  Description
 ------------ | --------------------------
-*payuid* | In this parameter, you need to pass the Payu id (mihpayid) of the transaction. 
+*payuid* | In this parameter, you need to pass the Payu id (mihpayid) of the transaction.
 
 ## Output
 
-
 **If successfully fetched**
 
+```json
 {
       "status": 1,
       "msg": "Transaction Fetched Successfully",
@@ -77,10 +76,13 @@ Argument |  Description
             "Settled_At": null
       }
 }
+```
 
  **If mhpayid is missing**
 
+```json
 {
       "status": 0,
       "msg": "Parameter missing"
 }
+```

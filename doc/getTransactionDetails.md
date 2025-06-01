@@ -10,14 +10,15 @@ For time
 
 # PHP
 
+```php
     public function getTransaction($params) {
         $command = ($params['type'] == 'time') ? self::GET_TRANSACTION_INFO_API : self::GET_TRANSACTION_DETAILS_API;
         $this->params['data'] = ['var1' => $params['from'], 'var2' => $params['to'], 'command' => $command];
         return $this->execute();
     }
+```
 
 ## Method Arguments
-
 
 Argument |  Description
 ------------ | --------------------------
@@ -29,9 +30,9 @@ Argument |  Description
 
 ## Output
 
-
 **If successfully fetched**
 
+```json
 {
       "status": 1,
       "msg": "Transaction Fetched Successfully",
@@ -110,23 +111,30 @@ Argument |  Description
             }
       ]
 }
+```
 
  **Failure Scenarios- If no transactions found, the response is similar to the following:**
 
+```json
 {
       "status": 1,
       "msg": "Transaction Fetched Successfully",
       "Transaction_details": []
 }
+```
 
  **If invalid date is posted**
 
+```json
 {
       "status": 0,
       "msg": "Invalid Date Entered. Date format should be yyyy-mm-dd"
 }
+```
 
+```json
 {
       "status": 0,
       "msg": "Invalid Date Entered. Date format should be yyyy-mm-dd hh:mm:ss"
 }
+```
