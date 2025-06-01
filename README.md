@@ -181,6 +181,8 @@ Run the test suite to ensure everything works:
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
+**Note:** The namespace has been updated from `SarfarazStark\LaravelPayU` to `LaravelPayU` as part of a package refactor. Ensure you update your code accordingly.
+
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
