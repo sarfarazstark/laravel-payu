@@ -46,6 +46,8 @@ PAYU_SUCCESS_URL=https://your-site.com/payu/success
 PAYU_FAILURE_URL=https://your-site.com/payu/failure
 ```
 
+> **⚠️ Important**: The `PAYU_SUCCESS_URL` and `PAYU_FAILURE_URL` are required. If not set in your .env file, you must pass `surl` and `furl` parameters when calling payment methods, otherwise an `InvalidArgumentException` will be thrown.
+
 ## 🗄️ Database Schema
 
 The package creates three optimized database tables:
@@ -101,6 +103,9 @@ class PaymentController extends Controller
             'country' => 'India',
             'zipcode' => $request->zipcode,
             'udf1' => $request->user_id, // Custom field for user tracking
+            // Optional: Override default URLs from config
+            // 'surl' => route('payment.success'),
+            // 'furl' => route('payment.failure'),
         ];
 
         // Save transaction to database

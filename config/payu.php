@@ -57,8 +57,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | Default success and failure URLs for PayU transactions
+    | Note: These should be set in your .env file for proper functionality
     |
     */
-    'success_url' => env('PAYU_SUCCESS_URL', url('/payu/success')),
-    'failure_url' => env('PAYU_FAILURE_URL', url('/payu/failure')),
+    'success_url' => env('PAYU_SUCCESS_URL', ''),
+    'failure_url' => env('PAYU_FAILURE_URL', ''),
 ];

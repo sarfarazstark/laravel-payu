@@ -83,12 +83,19 @@ class PayU {
         //     return true;
         // }
         return $transaction;
-    }
-
-    public function showPaymentForm($params) {
+    }    public function showPaymentForm($params) {
         // Set default values from config if not provided
         $params['surl'] = $params['surl'] ?? config('payu.success_url');
         $params['furl'] = $params['furl'] ?? config('payu.failure_url');
+
+        // Validate required URLs
+        if (empty($params['surl'])) {
+            throw new \InvalidArgumentException('Success URL (surl) is required. Please set PAYU_SUCCESS_URL in your .env file or pass surl parameter.');
+        }
+        
+        if (empty($params['furl'])) {
+            throw new \InvalidArgumentException('Failure URL (furl) is required. Please set PAYU_FAILURE_URL in your .env file or pass furl parameter.');
+        }
 
         // Set default UDF fields if not provided
         $params['udf1'] = $params['udf1'] ?? '';
@@ -297,11 +304,20 @@ class PayU {
 
     /**s
      * Generate payment URL for API integration
-     */
-    public function generatePaymentUrl($params) {
+     */    public function generatePaymentUrl($params) {
         // Set default values
         $params['surl'] = $params['surl'] ?? config('payu.success_url');
         $params['furl'] = $params['furl'] ?? config('payu.failure_url');
+
+        // Validate required URLs
+        if (empty($params['surl'])) {
+            throw new \InvalidArgumentException('Success URL (surl) is required. Please set PAYU_SUCCESS_URL in your .env file or pass surl parameter.');
+        }
+        
+        if (empty($params['furl'])) {
+            throw new \InvalidArgumentException('Failure URL (furl) is required. Please set PAYU_FAILURE_URL in your .env file or pass furl parameter.');
+        }
+
         $params['key'] = $this->key;
         $params['hash'] = $this->getHashKey($params);
 
@@ -310,11 +326,20 @@ class PayU {
 
     /**
      * Get payment form data without HTML
-     */
-    public function getPaymentFormData($params) {
+     */    public function getPaymentFormData($params) {
         // Set default values
         $params['surl'] = $params['surl'] ?? config('payu.success_url');
         $params['furl'] = $params['furl'] ?? config('payu.failure_url');
+
+        // Validate required URLs
+        if (empty($params['surl'])) {
+            throw new \InvalidArgumentException('Success URL (surl) is required. Please set PAYU_SUCCESS_URL in your .env file or pass surl parameter.');
+        }
+        
+        if (empty($params['furl'])) {
+            throw new \InvalidArgumentException('Failure URL (furl) is required. Please set PAYU_FAILURE_URL in your .env file or pass furl parameter.');
+        }
+
         $params['udf1'] = $params['udf1'] ?? '';
         $params['udf2'] = $params['udf2'] ?? '';
         $params['udf3'] = $params['udf3'] ?? '';
