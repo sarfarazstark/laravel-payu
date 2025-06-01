@@ -33,6 +33,13 @@ class PayUServiceProvider extends ServiceProvider {
             __DIR__ . '/../database/migrations/' => database_path('migrations'),
         ], 'payu-migrations');
 
+        // Publish models
+        $this->publishes([
+            __DIR__ . '/Models/PublishablePayUTransaction.php' => app_path('Models/PayUTransaction.php'),
+            __DIR__ . '/Models/PublishablePayURefund.php' => app_path('Models/PayURefund.php'),
+            __DIR__ . '/Models/PublishablePayUWebhook.php' => app_path('Models/PayUWebhook.php'),
+        ], 'payu-models');
+
         // Load migrations when testing
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');

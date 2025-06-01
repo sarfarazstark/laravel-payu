@@ -21,7 +21,7 @@ A comprehensive Laravel package for integrating PayU payment gateway with comple
 composer require sarfarazstark/laravel-payu
 ```
 
-### 2. Publish Configuration & Migrations
+### 2. Publish Configuration, Migrations & Models
 
 ```bash
 # Publish configuration file
@@ -30,8 +30,48 @@ php artisan vendor:publish --tag=payu-config
 # Publish migration files
 php artisan vendor:publish --tag=payu-migrations
 
+# Publish Eloquent models (optional)
+php artisan vendor:publish --tag=payu-models
+
 # Run migrations to create database tables
 php artisan migrate
+```
+
+> **💡 Note**: Publishing models is optional. You can work with the PayU transactions, refunds, and webhooks using the package's built-in models (`SarfarazStark\LaravelPayU\Models\*`). However, if you want to customize the models or add additional relationships in your application, publish them to your `app/Models` directory.
+
+### 3. Working with Published Models
+
+Once you publish the models with `php artisan vendor:publish --tag=payu-models`, you'll have three Eloquent models in your `app/Models` directory:
+
+#### PayUTransaction Model
+
+- **Location**: `app/Models/PayUTransaction.php`
+- **Features**: Complete transaction tracking with relationships and helper methods
+- **Constants**: Status and payment mode constants for easy reference
+
+#### PayURefund Model
+
+- **Location**: `app/Models/PayURefund.php`
+- **Features**: Refund management with status tracking and relationships
+- **Constants**: Refund status and type constants
+
+#### PayUWebhook Model
+
+- **Location**: `app/Models/PayUWebhook.php`
+- **Features**: Webhook processing and verification with event tracking
+- **Constants**: Event type and status constants
+
+Example usage with published models:
+
+```php
+use App\Models\PayUTransaction;
+use App\Models\PayURefund;
+use App\Models\PayUWebhook;
+
+// Using published models works exactly the same as package models
+$transaction = PayUTransaction::where('txnid', 'TXN123')->first();
+$refunds = PayURefund::successful()->get();
+$webhooks = PayUWebhook::verified()->recent()->get();
 ```
 
 ### 3. Environment Configuration
