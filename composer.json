@@ -1,0 +1,52 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "payu/laravel-payu",
+    "description": "Laravel PayU Payment Gateway Integration Package",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "payu",
+        "payment",
+        "gateway",
+        "integration"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PayU Laravel Package",
+            "email": "support@payu.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^9.0|^10.0|^11.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0|^10.0",
+        "orchestra/testbench": "^7.0|^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PayU\\LaravelPayU\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PayU\\LaravelPayU\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PayU\\LaravelPayU\\PayUServiceProvider"
+            ],
+            "aliases": {
+                "PayU": "PayU\\LaravelPayU\\Facades\\PayU"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
